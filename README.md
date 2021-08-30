@@ -59,7 +59,7 @@ bash download.sh /tmp
 ``` 
   python3 classify_image.py -m model.tflite -l labels.txt -i smile.png
 ```
-
+![screenshot](https://github.com/gharishkumar/raspberrypi-image-classifier-tf-lite/raw/main/Screenshot%20(177).png)
 ## Run the example
 
 ```
