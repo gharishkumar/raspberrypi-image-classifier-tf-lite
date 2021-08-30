@@ -55,6 +55,10 @@ cd examples/lite/examples/image_classification/raspberry_pi
 bash download.sh /tmp
 ```
 
+## To classify image
+``` 
+  python3 classify_image.py -m model.tflite -l labels.txt -i smile.png
+```
 
 ## Run the example
 
