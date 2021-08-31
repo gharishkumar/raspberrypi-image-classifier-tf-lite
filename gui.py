@@ -96,12 +96,12 @@ root = Tk()
 root.title("Image Classifier")
 
 # Set the resolution of window
-root.geometry("440x420")
+root.geometry("440x440")
 
 # Allow Window to be resizable
 root.resizable(width = True, height = True)
-title = Label(root, text = "Hashan Medicare").grid(row = 0, column = 0, pady = 10, columnspan = 4)
-title1 = Label(root, text = "Image Classifier").grid(row = 1, column = 0, columnspan = 4)
+title = Label(root, text = "Hashan Medicare", font='sans 20 bold').grid(row = 0, column = 0, pady = 10, columnspan = 4)
+title1 = Label(root, text = "Image Classifier", font='sans 16 bold').grid(row = 1, column = 0, columnspan = 4)
 # Create a button and place it into the window using grid layout
 grp = LabelFrame(root, text = "Select Image")
 grp.grid(row = 2, column = 0, rowspan = 2, padx = 20, pady = (35, 0))
@@ -112,7 +112,7 @@ btn1 = Button(grp, text ='Capture', width = 10, command = capture).grid(
 btn2 = Button(root, text ='Classify', width = 10, command = classify).grid(
 										row = 4, column = 0, padx = 10, pady = 30)
 show_img()
-identification = Label(root, text = "Result", bg = "white", width = 43)
+identification = Label(root, text = "Result", font='sans 10 bold', bg = "white", width = 43)
 identification.grid(row = 5, column = 0, padx = 50, columnspan = 5)
 
 confidence = Label(root, text = "Confidence", bg = "white", width = 43)
