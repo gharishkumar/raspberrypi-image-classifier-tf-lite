@@ -16,6 +16,8 @@ import numpy as np
 
 from tflite_runtime.interpreter import Interpreter
 
+import picamera
+
 x='/home/pi/Desktop/bg.jpg'
 
 def load_labels(path):
@@ -30,7 +32,6 @@ def set_input_tensor(interpreter, image):
 
 
 def classify_image(interpreter, image, top_k=1):
-	"""Returns a sorted array of classification results."""
 	set_input_tensor(interpreter, image)
 	interpreter.invoke()
 	output_details = interpreter.get_output_details()[0]
@@ -69,17 +70,23 @@ def show_img():
 
 def openfilename():
 	# open file dialog box to select image
-	# The dialogue box has a title "Open"
-	filename = filedialog.askopenfilename(title ='image')
+	# The dialogue box has a title "Image"
+	filename = filedialog.askopenfilename(title ='Image')
 	return filename
 
 def capture():
-	print('capture')
+	global x
+	with picamera.PiCamera() as camera:
+		camera.resolution = (1024, 768)
+		camera.start_preview()
+		# Camera warm-up time
+		time.sleep(2)
+		x = 'pi_camera.jpg'
+		camera.capture(x)
 
 def classify():
 	global x
 	image = Image.open(x).convert('RGB').resize((width, height), Image.ANTIALIAS)
-
 	results = classify_image(interpreter, image)
 	# print(results)
 	label_id, prob = results[0]
@@ -102,7 +109,6 @@ root.geometry("440x440")
 root.resizable(width = True, height = True)
 title = Label(root, text = "Hashan Medicare", font='sans 20 bold').grid(row = 0, column = 0, pady = 10, columnspan = 4)
 title1 = Label(root, text = "Image Classifier", font='sans 16 bold').grid(row = 1, column = 0, columnspan = 4)
-# Create a button and place it into the window using grid layout
 grp = LabelFrame(root, text = "Select Image")
 grp.grid(row = 2, column = 0, rowspan = 2, padx = 20, pady = (35, 0))
 btn = Button(grp, text ='Browse', width = 10, command = open_img).grid(
